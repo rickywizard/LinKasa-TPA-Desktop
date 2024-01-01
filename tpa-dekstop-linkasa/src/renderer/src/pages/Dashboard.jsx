@@ -6,12 +6,18 @@ import NavigationBar from '../components/NavigationBar'
 import TopBar from '../components/TopBar'
 import { useNavigate } from 'react-router-dom'
 import EmployeePage from './hrd/EmployeePage'
+import PopUp from '../components/PopUp'
+import FlightSchedulePage from './fom/FlightSchedulePage'
+import EmployeeTrainingPage from './hrd/EmployeeTrainingPage'
+import FlightCrewPage from './fom/FlightCrewPage'
+import MaintenanceSchedulePage from './maintenance/MaintenanceSchedulePage'
+import LostFoundPage from './lostfound/LostFoundPage'
 
 const Dashboard = () => {
   const { currentUser, logout } = useAuth()
   const [error, setError] = useState('')
   const [userData, setUserData] = useState([])
-  const [selectedMenu, setSelectedMenu] = useState('employees')
+  const [selectedMenu, setSelectedMenu] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -43,30 +49,30 @@ const Dashboard = () => {
 
   return (
     <>
-      <TopBar handleSignOut={handleSignOut}/>
-      <div className='flex'>
+      <TopBar handleSignOut={handleSignOut} />
+      <div className="flex h-screen overflow-y-hidden">
         <NavigationBar role={userData.role} selectedMenu={handleSelectedMenu} />
 
-        <div className='flex-1 p-4'>
-          <h1 className='text-2xl font-bold mb-2'>Hello, {userData.name}</h1>
+        {/* CONTENT */}
+        <div className="flex-1 p-4 overflow-y-auto">
+          <h1 className="text-2xl font-bold mb-2">Hello, {userData.name}</h1>
 
-          {selectedMenu === 'employees' && (
-            <EmployeePage />
-          )}
+          {/* HRD */}
+          {selectedMenu === 'employees' && <EmployeePage />}
+          {selectedMenu === 'trainingschedule' && <EmployeeTrainingPage />}
 
-          {selectedMenu === 'jobvacancies' && (
-            <div>
-              <h2>Job Vacancies</h2>
-            </div>
-          )}
+          {/* FLIGHT OPERATIONS MANAGER */}
+          {selectedMenu === 'flightschedule' && <FlightSchedulePage role={userData.role} />}
+          {selectedMenu === 'flightcrew' && <FlightCrewPage/>}
 
-          {selectedMenu === 'trainingschedule' && (
-            <div>
-            <h2>Training Schedule</h2>
-          </div>
-          )}
+          {/* COO & Maintenance Manager */}
+          {selectedMenu === 'maintenanceschedule' && <MaintenanceSchedulePage role={userData.role} />}
+
+          {selectedMenu === 'lostlog' && <LostFoundPage />}
         </div>
       </div>
+
+      {error && <PopUp message={error} onClose={() => setError('')} type="error" />}
     </>
   )
 }
