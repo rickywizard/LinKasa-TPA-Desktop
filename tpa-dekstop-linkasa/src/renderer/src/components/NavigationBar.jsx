@@ -27,6 +27,30 @@ const NavigationBar = ({ role, selectedMenu }) => {
                   Training schedule
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => handleMenuClick('jobvacancies')}
+                  className="block p-3 hover:bg-gray-700 w-full text-left"
+                >
+                  Job Vacancies
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleMenuClick('applicants')}
+                  className="block p-3 hover:bg-gray-700 w-full text-left"
+                >
+                  Applicants
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleMenuClick('interviews')}
+                  className="block p-3 hover:bg-gray-700 w-full text-left"
+                >
+                  Interview Schedules
+                </button>
+              </li>
             </>
           )}
 

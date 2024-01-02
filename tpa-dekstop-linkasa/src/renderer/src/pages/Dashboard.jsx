@@ -12,6 +12,9 @@ import EmployeeTrainingPage from './hrd/EmployeeTrainingPage'
 import FlightCrewPage from './fom/FlightCrewPage'
 import MaintenanceSchedulePage from './maintenance/MaintenanceSchedulePage'
 import LostFoundPage from './lostfound/LostFoundPage'
+import JobVacancyPage from './hrd/JobVacancyPage'
+import ApplicantsPage from './hrd/ApplicantsPage'
+import InterviewsPage from './hrd/InterviewsPage'
 
 const Dashboard = () => {
   const { currentUser, logout } = useAuth()
@@ -60,6 +63,9 @@ const Dashboard = () => {
           {/* HRD */}
           {selectedMenu === 'employees' && <EmployeePage />}
           {selectedMenu === 'trainingschedule' && <EmployeeTrainingPage />}
+          {selectedMenu === 'jobvacancies' && <JobVacancyPage />}
+          {selectedMenu === 'applicants' && <ApplicantsPage />}
+          {selectedMenu === 'interviews' && <InterviewsPage />}
 
           {/* FLIGHT OPERATIONS MANAGER */}
           {selectedMenu === 'flightschedule' && <FlightSchedulePage role={userData.role} />}
